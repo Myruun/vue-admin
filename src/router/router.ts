@@ -7,7 +7,19 @@
 export default [
   {
     path: '/',
-    redirect: '/index'
+    name: 'index',
+    component: () => import('@/views/index/index.vue'),
+    meta: {
+      icon: '',
+      keepAlive: true,
+      title: 'index'
+    },
+    children: [
+      {
+        path: '/',
+        component: () => import('@/components/404/index.vue')
+      }
+    ]
   },
   {
     path: '/login',
@@ -20,13 +32,13 @@ export default [
     }
   },
   {
-    path: '/index',
-    name: 'index',
-    component: () => import('@/views/index/index.vue'),
+    path: '/404',
+    name: '404',
+    component: () => import('@/components/404/index.vue'),
     meta: {
       icon: '',
       keepAlive: true,
-      title: 'index'
+      title: '404'
     }
   }
 ]

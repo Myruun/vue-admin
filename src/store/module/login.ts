@@ -14,12 +14,12 @@ const getters: GetterTree<LoginState, any> = {
 // 更改state
 const mutations: MutationTree<LoginState> = {
   // 更新state都用该方法
-  UPDATE_STATE(state: LoginState, data: LoginState) {
+  UPDATE_STATE(state: any, data: any) {
     for (const key in data) {
       if (!data.hasOwnProperty(key)) {
         return
       }
-      // state[key] = data[key]
+      state[key] = data[key]
     }
   }
 }

@@ -4,21 +4,47 @@
 
     <el-card class="box-card">
       <el-row>
-        <el-col :span="14"
-          ><div class="grid-content bg-purple bg-login">
+        <el-col :span="14">
+          <div class="grid-content bg-purple bg-login">
             <img
               src="https://img.zcool.cn/community/013d3156e2344532f875520f71898c.jpg@1280w_1l_2o_100sh.jpg"
               alt=""
             /></div
         ></el-col>
         <el-col :span="10" class="division">
-          <h3>欢迎登录管理后台登录系统</h3>
-          <div class="grid-content bg-purple-light ">
-            <el-input placeholder="请输入账号"> </el-input>
-            <p></p>
-            <el-input placeholder="请输入密码"> </el-input>
-            <p></p>
-            <el-button type="primary">登录</el-button>
+          <div class="qr_code">
+            <img @click="switchtab" src="../../assets/image/er.png" alt="" />
+            <div class="mask"></div>
+          </div>
+          <div v-show="isShow == true">
+            <h3>欢迎登录管理后台登录系统</h3>
+            <div class="grid-content bg-purple-light ">
+              <el-input placeholder="请输入账号"> </el-input>
+              <p></p>
+              <el-input placeholder="请输入密码"> </el-input>
+              <p></p>
+
+              <el-row>
+                <el-col :span="12">
+                  <el-input placeholder="请输入验证码"> </el-input>
+                  <p></p>
+                </el-col>
+                <el-col :span="4">
+                  <p></p>
+                </el-col>
+
+                <el-col :span="8">
+                  <el-button type="primary">获取验证码</el-button>
+                </el-col>
+              </el-row>
+
+              <el-button type="primary" @click="setlogin">登录</el-button>
+            </div>
+          </div>
+
+          <div v-show="isShow == false" class="show_qr_code">
+            <h3>欢迎登录管理后台登录系统</h3>
+            <img src="../../assets/image/er.png" alt="" />
           </div>
         </el-col>
       </el-row>
@@ -34,22 +60,27 @@ import { LoginData } from "@/types/views/login.interface";
 
 @Component({})
 export default class About extends Vue {
-  // data() {
-  //   return {};
-  // }
-
+  isShow: boolean = true;
   created() {
     //
   }
-
-  activated() {
-    //
+  setlogin() {
+    // this.$store
+    //   .dispatch("LoginByUsername")
+    //   .then(() => {
+    this.$router.push({ path: "/404" });
+    // })
+    // .catch(err => {
+    //   // this.$message.error(err); //登录失败提示错误
+    console.log("zhixing");
+    // });
   }
-
+  switchtab() {
+    this.isShow = !this.isShow;
+  }
   mounted() {
     //
   }
-
   // 初始化函数
   init() {
     //
@@ -63,10 +94,11 @@ export default class About extends Vue {
 .login-wrap {
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, #333467 0%, #256fa1 87%);
-  // background: url(https://img.zcool.cn/community/0119cd5cb5571ea801208f8ba1e92f.jpg@1280w_1l_2o_100sh.jpg)
-  //   no-repeat center;
-  // background-size: cover;
+  // background: radial-gradient(bottom, #85bef8 50%, #409eff 100%);
+  // background: -webkit-radial-gradient(bottom, #85bef8 50%, #409eff 100%);
+  background: url(https://img.zcool.cn/community/01d90d5b51aeb0a8012036be55bf32.jpg@1280w_1l_2o_100sh.jpg)
+    no-repeat center;
+  background-size: cover;
   .box-card {
     width: 60%;
     height: 400px;
@@ -84,13 +116,35 @@ export default class About extends Vue {
         padding: 20px;
         height: 100%;
         padding-left: 15px;
+        position: relative;
+        .qr_code {
+          position: absolute;
+          right: 0px;
+          top: 0px;
+          width: 60px;
+          height: 60px;
+          overflow: hidden;
+          img {
+            position: absolute;
+            right: 0px;
+            cursor: pointer;
+          }
+          .mask {
+            position: absolute;
+            left: -76px;
+            width: 120px;
+            height: 100px;
+            background: #ffffff;
+            transform: rotate(46deg);
+          }
+        }
         .grid-content {
           width: 80%;
           margin: auto;
         }
         h3 {
           text-align: center;
-          margin-bottom: 20px;
+          margin-bottom: 30px;
         }
         p {
           height: 11px;
@@ -102,6 +156,29 @@ export default class About extends Vue {
         }
         .el-button {
           width: 100%;
+        }
+        h2 {
+          font-size: 19px;
+          display: flex;
+          justify-content: space-between;
+          color: #999999;
+          width: 50%;
+          margin: auto;
+          margin-top: 20px;
+          i {
+            font-size: 21px;
+            vertical-align: middle;
+          }
+        }
+        .show_qr_code {
+          text-align: center;
+          left: 50%;
+          top: 10%;
+          transform: translate(0%, 7%);
+          img {
+            width: 210px;
+            height: 210px;
+          }
         }
       }
     }

@@ -7,7 +7,7 @@ Vue.use(Router)
 
 const router = new Router({
   routes,
-  mode: 'history'
+  mode: 'hash'
 })
 
 // 登陆页面路由 name
@@ -15,7 +15,8 @@ const LOGIN_PAGE_NAME = 'login'
 
 // 跳转之前
 router.beforeEach((to, from, next) => {
-  const token = getToken()
+  // const token = getToken()
+  const token = true
   if (!token && to.name !== LOGIN_PAGE_NAME) {
     // 未登录且要跳转的页面不是登录页
     next({

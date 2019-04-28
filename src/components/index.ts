@@ -1,5 +1,3 @@
-import Test from './test/test.vue'
+import Four from './404/index.vue'
 
-export {
-  Test
-}
+export { Four }
