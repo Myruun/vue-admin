@@ -1,9 +1,14 @@
 <template>
   <div class="index-wrap">
     <el-container>
-      <el-aside width="200px">Aside</el-aside>
+      <el-aside> <asider /></el-aside>
       <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+          <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
+            <el-radio-button :label="false">展开</el-radio-button>
+            <el-radio-button :label="true">收起</el-radio-button>
+          </el-radio-group></el-header
+        >
         <el-main>
           <router-view />
         </el-main>
@@ -14,27 +19,30 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { Getter, Action } from "vuex-class";
-import { IndexData } from "@/types/views/index.interface";
-// import {  } from "@/components" // 组件
+import { Getter, Mutation } from "vuex-class";
+import { asider } from "@/components/index"; // 组件
+import { IndexState } from "@/types/views/index.interface";
 
-@Component({})
-export default class About extends Vue {
+@Component({
+  components: { asider }
+})
+export default class index extends Vue {
   // Getter
   // @Getter author
+  // @Getter isCollapse;
 
-  // Action
-  // @Action GET_DATA_ASYN
-
-  // data
-  data: IndexData = {
-    pageName: "index"
-  };
-
+  @Mutation SET_AUTHOR: any;
+  isCollapse: boolean = false;
   created() {
-    //
+    // this.GET_DATA_ASYN();
+    // console.log();
+    this.SET_AUTHOR();
   }
-
+  switchaside() {
+    this.isCollapse = !this.isCollapse;
+    console.log(this.isCollapse);
+    this.SET_AUTHOR(this.isCollapse);
+  }
   activated() {
     //
   }
@@ -67,6 +75,7 @@ export default class About extends Vue {
   .el-aside {
     background-color: $aside;
     color: #333;
+    width: auto !important;
   }
 
   .el-main {

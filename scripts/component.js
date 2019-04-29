@@ -80,7 +80,7 @@ export interface ${capPirName}Data {
 fs.mkdirSync(`${basePath}/components/${dirName}`) // mkdir
 
 process.chdir(`${basePath}/components/${dirName}`) // cd views
-fs.writeFileSync(`${dirName}.vue`, VueTep) // vue
+fs.writeFileSync(`index.vue`, VueTep) // vue
 
 process.chdir(`${basePath}/types/components`) // cd components
 fs.writeFileSync(`${dirName}.interface.ts`, interfaceTep) // interface

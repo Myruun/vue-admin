@@ -31,19 +31,33 @@ export default class About extends Vue {
     canvas = document.getElementById("canvas");
 
     let ctx = canvas.getContext("2d");
-    let w = (canvas.width = window.screen.availWidth - 250);
+    let w = (canvas.width = window.screen.availWidth - 260);
     let h = (canvas.height = window.screen.availHeight - 200);
-    // let h = (document.getElementById("canvas").setAttribute('height',window.screen.availHeight - 200);
-    // all['checked']
-    ctx.fillStyle = "#F5F5F5";
+    ctx.fillStyle = "#F6F6F6";
     ctx.fillRect(0, 0, w, h);
 
-    // canvas_text(ctx, "要写的文字", "21px bold 黑体", "#000", 300);
-    ctx.rect(20, 0, 150, 100);
-    ctx.fillStyle = "#8F8F8F";
-    ctx.fill();
+    ctx.beginPath();
+    ctx.lineCap = "round";
+    ctx.lineWidth = 12;
+    ctx.strokeStyle = "#8E8E8E";
+    ctx.moveTo(w / 1 - w / 6 + 20, h / 2 - 180);
+    ctx.arc(w / 1 - w / 6, 90, 20, 0, 1.6 * Math.PI, true);
+    ctx.lineTo(w / 6, 70);
+    ctx.moveTo(w / 6, 70);
+    ctx.lineTo(w / 6, h / 2 - 20);
+    ctx.arc(w / 6 + 70, h / 2 - 20, 70, 3, 0.5 * Math.PI, true);
+    ctx.lineTo(w / 6 + 310, h / 2 + 50);
 
+    ctx.moveTo(w / 2, 210);
+    ctx.lineTo(w / 2 - 20, 270);
+    ctx.lineTo(w / 2 + 40, 270);
+
+    ctx.fill();
+    ctx.stroke();
     // #8F8F8F
+    ctx.globalAlpha = 0.8;
+    ctx.fillStyle = "#FF2626";
+    ctx.fillRect(w / 1 - w / 6 - 60, h / 2 - 190, 160, 100);
   }
 
   // 初始化函数

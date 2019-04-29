@@ -2,4 +2,3 @@
 export interface LoginData {
   componentName: string
 }
-

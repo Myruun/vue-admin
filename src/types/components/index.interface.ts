@@ -2,4 +2,3 @@
 export interface IndexData {
   componentName: string
 }
-

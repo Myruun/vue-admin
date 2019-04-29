@@ -24,61 +24,46 @@ const VueTep = `<template>
   </div>
 </template>
 
-<script lang="ts" src="./${dirName}.ts"></script>
+
+<script lang="ts">
+  import { Component, Vue, Prop } from "vue-property-decorator"
+  import { Getter, Action } from 'vuex-class'
+  import { ${capPirName}Data } from '@/types/views/${dirName}.interface'
+  // import {  } from "@/components" // 组件
+
+  @Component({})
+  export default class About extends Vue {
+    // prop
+    @Prop({
+      required: false,
+      default: ''
+    }) name!: string
+
+    // data
+
+    created() {
+      //
+    }
+    
+    activated() {
+      //
+    }
+
+    mounted() {
+      //
+    }
+
+  }
+</script>
 
 <style lang="scss">
-  @import './${dirName}.scss'
+  @import "@/assets/scss/variables.scss";
+
+  .${dirName}-wrap {
+    width: 100%;
+  }
 </style>
-
 `
-
-// ts 模版
-const tsTep = `import { Component, Vue } from "vue-property-decorator"
-import { Getter, Action } from "vuex-class"
-import { ${capPirName}Data } from '@/types/views/${dirName}.interface'
-// import {  } from "@/components" // 组件
-
-@Component({})
-export default class About extends Vue {
-  // Getter
-  // @Getter author
-  
-  // Action
-  // @Action GET_DATA_ASYN
-
-  // data
-  data: ${capPirName}Data = {
-    pageName: '${dirName}'
-  }
-
-  created() {
-    //
-  }
-  
-  activated() {
-    //
-  }
-
-  mounted() {
-    //
-  }
-
-  // 初始化函数
-  init() {
-    //
-  }
-    
-}
-`
-
-// scss 模版
-const scssTep = `@import "@/assets/scss/variables.scss";
-
-.${dirName}-wrap {
-  width: 100%;
-}
-`
-
 // interface 模版
 const interfaceTep = `// ${dirName}.Data 参数类型
 export interface ${capPirName}Data {
@@ -150,17 +135,17 @@ export const getData = (data) => {
 fs.mkdirSync(`${basePath}/views/${dirName}`) // mkdir
 
 process.chdir(`${basePath}/views/${dirName}`) // cd views
-fs.writeFileSync(`${dirName}.vue`, VueTep) // vue 
-fs.writeFileSync(`${dirName}.ts`, tsTep) // ts
-fs.writeFileSync(`${dirName}.scss`, scssTep) // scss
+fs.writeFileSync(`index.vue`, VueTep) // vue
+// fs.writeFileSync(`${dirName}.ts`, tsTep) // ts
+// fs.writeFileSync(`${dirName}.scss`, scssTep) // scss
 
-process.chdir(`${basePath}/types/views`); // cd types
+process.chdir(`${basePath}/types/views`) // cd types
 fs.writeFileSync(`${dirName}.interface.ts`, interfaceTep) // interface
 
-process.chdir(`${basePath}/store/module`); // cd store
+process.chdir(`${basePath}/store/module`) // cd store
 fs.writeFileSync(`${dirName}.ts`, vuexTep) // vuex
 
-process.chdir(`${basePath}/api`); // cd api
+process.chdir(`${basePath}/api`) // cd api
 fs.writeFileSync(`${dirName}.ts`, apiTep) // api
 
 process.exit(0)
