@@ -3,9 +3,11 @@
     <el-menu
       default-active="1-4-1"
       class="el-menu-vertical-demo"
+      hide-timeout="0"
+      :collapse-transition="false"
+      :router="true"
       :collapse="this.$store.state.Index.isCollapse"
     >
-      <!-- :collapse="isCollapse" -->
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-location"></i>
@@ -13,7 +15,7 @@
         </template>
         <el-menu-item-group>
           <span slot="title">分组一</span>
-          <el-menu-item index="1-1">选项1</el-menu-item>
+          <el-menu-item index="installs">选项1</el-menu-item>
           <el-menu-item index="1-2">选项2</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="分组2">
@@ -24,18 +26,18 @@
           <el-menu-item index="1-4-1">选项1</el-menu-item>
         </el-submenu>
       </el-submenu>
-      <el-menu-item index="2">
+      <!-- <el-menu-item index="2">
         <i class="el-icon-menu"></i>
         <span slot="title">导航二</span>
       </el-menu-item>
-      <el-menu-item index="3" disabled>
+      <el-menu-item index="3">
         <i class="el-icon-document"></i>
         <span slot="title">211</span>
       </el-menu-item>
-      <el-menu-item index="4">
+      <el-menu-item index="install">
         <i class="el-icon-setting"></i>
-        <span slot="title">导航四</span>
-      </el-menu-item>
+        <span slot="title">设置</span>
+      </el-menu-item> -->
     </el-menu>
   </div>
 </template>
@@ -44,14 +46,23 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { Getter, Action } from "vuex-class";
+import aside from "@/router/aside";
+import sidebarItem from "./SidebarItem.vue";
 
+// import putdialog from "./dialog.vue"; // 组件
+interface Window {
+  aside: any;
+}
 @Component({})
 export default class Aside extends Vue {
   created() {
     //
-    // console.log(this.$store.state.Index.isCollapse);
   }
 
+  mounted() {
+    //
+    console.log(aside.options);
+  }
   activated() {
     //
   }
@@ -69,10 +80,15 @@ export default class Aside extends Vue {
 .four-wrap {
   width: 100%;
   height: 100%;
+  // background-color: $aside;
   overflow: hidden;
-  // .el-menu-item {
-  //   // width: 200px;
-  // }
+  .el-submenu__title {
+    padding: 0 45px;
+    min-width: 200px;
+  }
+  .el-menu {
+    border: none;
+  }
 }
 </style>
 

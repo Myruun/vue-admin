@@ -4,11 +4,9 @@
       <el-aside> <asider /></el-aside>
       <el-container>
         <el-header>
-          <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-            <el-radio-button :label="false">展开</el-radio-button>
-            <el-radio-button :label="true">收起</el-radio-button>
-          </el-radio-group></el-header
-        >
+          <i @click="switchaside" class="iconfont icon-qiehuan- swithaside"></i>
+          <el-button type="primary" @click="switchaside">主要按钮</el-button>
+        </el-header>
         <el-main>
           <router-view />
         </el-main>
@@ -21,26 +19,18 @@
 import { Component, Vue } from "vue-property-decorator";
 import { Getter, Mutation } from "vuex-class";
 import { asider } from "@/components/index"; // 组件
-import { IndexState } from "@/types/views/index.interface";
 
 @Component({
   components: { asider }
 })
-export default class index extends Vue {
-  // Getter
-  // @Getter author
-  // @Getter isCollapse;
-
+export default class Index extends Vue {
   @Mutation SET_AUTHOR: any;
   isCollapse: boolean = false;
   created() {
-    // this.GET_DATA_ASYN();
-    // console.log();
     this.SET_AUTHOR();
   }
   switchaside() {
     this.isCollapse = !this.isCollapse;
-    console.log(this.isCollapse);
     this.SET_AUTHOR(this.isCollapse);
   }
   activated() {
@@ -70,12 +60,26 @@ export default class index extends Vue {
   .el-header {
     background-color: $header;
     color: #333;
+    display: flex;
+    padding-left: 0px;
+    justify-content: space-between;
+    align-items: center;
+    .swithaside {
+      width: 60px;
+      height: 60px;
+      text-align: center;
+      line-height: 60px;
+      cursor: pointer;
+      &:hover {
+        background: #cccccc;
+      }
+    }
   }
 
   .el-aside {
-    background-color: $aside;
     color: #333;
     width: auto !important;
+    border-right: solid 1px #e6e6e6;
   }
 
   .el-main {

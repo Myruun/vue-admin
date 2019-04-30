@@ -5,9 +5,11 @@ import { getToken } from '@/utils/common'
 
 Vue.use(Router)
 
+// const routes = new Set(route)
+
 const router = new Router({
   routes,
-  mode: 'hash'
+  mode: 'history'
 })
 
 // 登陆页面路由 name

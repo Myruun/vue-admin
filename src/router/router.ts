@@ -18,6 +18,16 @@ export default [
       {
         path: '/',
         component: () => import('@/components/404/index.vue')
+      },
+      {
+        path: '/install',
+        name: 'install',
+        component: () => import('@/views/installs/index.vue'),
+        meta: {
+          icon: '',
+          keepAlive: true,
+          title: '设置'
+        }
       }
     ]
   },
@@ -34,24 +44,6 @@ export default [
   {
     path: '*',
     name: '404',
-    component: () => import('@/components/404/index.vue'),
-    meta: {
-      icon: '',
-      keepAlive: true,
-      title: '404'
-    }
-  }
-]
-
-export const asideRoutes = [
-  {
-    path: '/install',
-    name: 'install',
-    component: () => import('@/views/installs/index.vue'),
-    meta: {
-      icon: '',
-      keepAlive: true,
-      title: '设置'
-    }
+    component: () => import('@/components/404/index.vue')
   }
 ]
