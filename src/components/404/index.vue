@@ -24,18 +24,15 @@ export default class About extends Vue {
   activated() {
     //
   }
-
   mounted() {
     let _this = this;
     let canvas: any;
     canvas = document.getElementById("canvas");
-
     let ctx = canvas.getContext("2d");
     let w = (canvas.width = window.screen.availWidth - 260);
     let h = (canvas.height = window.screen.availHeight - 200);
     ctx.fillStyle = "#F6F6F6";
     ctx.fillRect(0, 0, w, h);
-
     ctx.beginPath();
     ctx.lineCap = "round";
     ctx.lineWidth = 12;

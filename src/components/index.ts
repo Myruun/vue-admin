@@ -1,3 +1,4 @@
 import Four from './404/index.vue'
 import asider from './aside/index.vue'
-export { Four, asider }
+import sidebarItem from './aside/SidebarItem.vue'
+export { Four, asider, sidebarItem }

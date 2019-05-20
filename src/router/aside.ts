@@ -15,23 +15,41 @@ Vue.use(Router)
 const aside = new Router({
   routes: [
     {
-      path: '/login',
-      name: 'login',
-      component: () => import('@/views/login/login.vue'),
+      path: '/',
+      name: 'shoye',
+      component: () => import('@/views/index/index.vue'),
       meta: {
-        icon: '',
-        keepAlive: true,
-        title: '登录'
-      }
+        icon: 'icon-shezhi',
+        keepAlive: true
+      },
+      children: [
+        {
+          path: '/',
+          name: '404',
+          component: () => import('@/components/404/index.vue'),
+          meta: {
+            icon: 'icon-shezhi',
+            keepAlive: true
+          }
+        },
+        {
+          path: '/install',
+          name: '设置',
+          component: () => import('@/views/installs/index.vue'),
+          meta: {
+            icon: 'icon-shezhi',
+            keepAlive: true
+          }
+        }
+      ]
     },
     {
       path: '/install',
-      name: 'install',
+      name: '设置',
       component: () => import('@/views/installs/index.vue'),
       meta: {
-        icon: '',
-        keepAlive: true,
-        title: '设置'
+        icon: 'icon-shezhi',
+        keepAlive: true
       }
     }
   ],

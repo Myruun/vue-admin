@@ -26,12 +26,7 @@
       </el-table-column>
     </el-table>
 
-    <el-dialog
-      title="提示"
-      :visible.sync="dialogVisible"
-      width="30%"
-      :before-close="handleClose"
-    >
+    <el-dialog title="提示" width="30%">
       <!-- <span>这是一段信息</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
@@ -57,14 +52,6 @@ import putdialog from "./dialog.vue"; // 组件
   }
 })
 export default class About extends Vue {
-  // prop
-  // @Prop({
-  //   required: false,
-  //   default: ""
-  // })
-  // name!: string;
-
-  // data
   tableData: any = [
     {
       date: "2016-05-02",
@@ -91,17 +78,15 @@ export default class About extends Vue {
     //
   }
 
-  activated() {
-    //
-    // this.$confirm("确认关闭？")
-    //   .then(_ => {
-    //     // done();
-    //   })
-    //   .catch(_ => {});
-  }
-
   mounted() {
     //
+    let showtableData = this.tableData;
+    for (let item of showtableData) {
+      item.car = false;
+      console.log(item);
+    }
+
+    this.tableData = showtableData;
   }
 }
 </script>
