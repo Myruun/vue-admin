@@ -43,7 +43,6 @@ export default {
     }
   },
   created () {
-    console.log(aside.options.routes)
     this.router = aside.options.routes
   }
 }

@@ -16,32 +16,42 @@ const aside = new Router({
   routes: [
     {
       path: '/',
-      name: 'shoye',
+      name: '首页',
       component: () => import('@/views/index/index.vue'),
       meta: {
-        icon: 'icon-shezhi',
+        icon: 'icon-shouye',
         keepAlive: true
       },
       children: [
         {
           path: '/',
-          name: '404',
-          component: () => import('@/components/404/index.vue'),
+          name: '数据统计',
+          component: () => import('@/views/echarts/index.vue'),
           meta: {
-            icon: 'icon-shezhi',
-            keepAlive: true
-          }
-        },
-        {
-          path: '/install',
-          name: '设置',
-          component: () => import('@/views/installs/index.vue'),
-          meta: {
-            icon: 'icon-shezhi',
+            icon: 'icon-shuju',
             keepAlive: true
           }
         }
       ]
+    },
+    {
+      path: '/install',
+      name: '新闻管理',
+      // component: () => import('@/views/installs/index.vue'),
+      component: () => import('@/views/echarts/index.vue'),
+      meta: {
+        icon: 'icon-shezhi',
+        keepAlive: true
+      }
+    },
+    {
+      path: '/install',
+      name: '新闻管理',
+      component: () => import('@/views/echarts/index.vue'),
+      meta: {
+        icon: 'icon-shezhi',
+        keepAlive: true
+      }
     },
     {
       path: '/install',

@@ -17,7 +17,7 @@ export default [
     children: [
       {
         path: '/',
-        component: () => import('@/components/404/index.vue')
+        component: () => import('@/views/echarts/index.vue')
       },
       {
         path: '/install',

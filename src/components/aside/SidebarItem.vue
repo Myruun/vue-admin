@@ -57,6 +57,7 @@ export default {
   computed: {
     // 默认激活的路由, 用来激活菜单选中状态
     defaultActive: function () {
+      console.log(this.$route.path)
       return this.$route.path
     },
   },
@@ -81,4 +82,20 @@ export default {
 </script>
 
 <style>
+.el-menu-item i {
+  vertical-align: middle;
+  display: inline-block;
+}
+.el-menu-item span {
+  margin-left: 7px;
+  display: inline-block;
+  /* padding-top: 1px; */
+  vertical-align: baseline;
+}
+.el-submenu__title span {
+  display: inline-block;
+  margin-left: 7px;
+  /* padding-top: 1px; */
+  vertical-align: baseline;
+}
 </style>
