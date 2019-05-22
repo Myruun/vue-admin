@@ -16,8 +16,10 @@ const mutations: MutationTree<EchartsState> = {
   // 更新state都用该方法
   UPDATE_STATE(state: EchartsState, data: EchartsState) {
     for (const key in data) {
-      if (!data.hasOwnProperty(key)) { return }
-      state[key] = data[key]
+      if (!data.hasOwnProperty(key)) {
+        return
+      }
+      // state[key] = data[key]
     }
   }
 }
@@ -25,7 +27,7 @@ const mutations: MutationTree<EchartsState> = {
 const actions: ActionTree<EchartsState, any> = {
   UPDATE_STATE_ASYN({ commit, state: EchartsState }, data: EchartsState) {
     commit('UPDATE_STATE', data)
-  },
+  }
   // GET_DATA_ASYN({ commit, state: LoginState }) {
   //   Echarts.getData()
   // }
@@ -37,4 +39,3 @@ export default {
   mutations,
   actions
 }
-

@@ -35,23 +35,52 @@ const aside = new Router({
       ]
     },
     {
-      path: '/install',
-      name: '新闻管理',
+      path: '/note',
+      name: '笔记管理',
       // component: () => import('@/views/installs/index.vue'),
-      component: () => import('@/views/echarts/index.vue'),
+      component: () => import('@/views/note/index.vue'),
       meta: {
-        icon: 'icon-shezhi',
+        icon: 'icon-bijinotes23',
         keepAlive: true
       }
     },
     {
-      path: '/install',
-      name: '新闻管理',
-      component: () => import('@/views/echarts/index.vue'),
+      path: '/blog',
+      name: '博客管理',
+      component: () => import('@/views/blog/index.vue'),
       meta: {
-        icon: 'icon-shezhi',
+        icon: 'icon-bokeyuan',
         keepAlive: true
       }
+    },
+    {
+      path: '/website',
+      name: '趣站管理',
+      component: () => import('@/views/website/index.vue'),
+      meta: {
+        icon: 'icon-wangzhan',
+        keepAlive: true
+      },
+      children: [
+        {
+          path: '/websitelist',
+          name: '网站列表',
+          component: () => import('@/views/website/index.vue'),
+          meta: {
+            icon: 'icon-liebiao',
+            keepAlive: true
+          }
+        },
+        {
+          path: '/category',
+          name: '网站类别',
+          component: () => import('@/views/website/category.vue'),
+          meta: {
+            icon: 'icon-leibie',
+            keepAlive: true
+          }
+        }
+      ]
     },
     {
       path: '/install',

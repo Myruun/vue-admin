@@ -56,9 +56,9 @@ export default {
   },
   computed: {
     // 默认激活的路由, 用来激活菜单选中状态
-    defaultActive: function () {
-      console.log(this.$route.path)
+    defaultActive () {
       return this.$route.path
+
     },
   },
   methods: {
@@ -71,10 +71,14 @@ export default {
         }
         while (v[-1] === '/') {
           v = v.substring(0, v.length)
+
         }
         return v
       }).join('/')
+
       path = path[0] === '/' ? path : '/' + path
+
+      console.log(path)
       return path
     }
   }
@@ -89,7 +93,6 @@ export default {
 .el-menu-item span {
   margin-left: 7px;
   display: inline-block;
-  /* padding-top: 1px; */
   vertical-align: baseline;
 }
 .el-submenu__title span {

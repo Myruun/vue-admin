@@ -48,7 +48,7 @@ export default class About extends Vue {
     let showtableData = this.tableData;
     for (let item of showtableData) {
       item.car = false;
-      console.log(item);
+      // console.log(item);
     }
 
     this.tableData = showtableData;

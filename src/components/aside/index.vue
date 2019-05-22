@@ -20,9 +20,13 @@
 </template>
 
 
+
+
 <script>
 import SidebarItem from './SidebarItem'
 import aside from '@/router/aside'
+
+import { city } from '@/assets/js/city'
 export default {
   naem: "aside",
   components: {
@@ -44,9 +48,10 @@ export default {
   },
   created () {
     this.router = aside.options.routes
+    // console.log(city())
   }
 }
-</script>
+ </script>
 
 <style lang="scss">
 @import "@/assets/scss/variables.scss";

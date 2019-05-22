@@ -24,9 +24,41 @@ export default [
         name: 'install',
         component: () => import('@/views/installs/index.vue'),
         meta: {
-          icon: '',
-          keepAlive: true,
-          title: '设置'
+          keepAlive: true
+        }
+      },
+      {
+        path: '/blog',
+        name: 'blog',
+        component: () => import('@/views/blog/index.vue'),
+        meta: {
+          keepAlive: true
+        }
+      },
+      {
+        path: '/website/websitelist',
+        name: 'website',
+        component: () => import('@/views/website/index.vue'),
+        meta: {
+          icon: 'icon-shuju',
+          keepAlive: true
+        }
+      },
+      {
+        path: '/website/category',
+        name: 'category',
+        component: () => import('@/views/website/category.vue'),
+        meta: {
+          icon: 'icon-shuju',
+          keepAlive: true
+        }
+      },
+      {
+        path: '/note',
+        name: 'note',
+        component: () => import('@/views/note/index.vue'),
+        meta: {
+          keepAlive: true
         }
       }
     ]
