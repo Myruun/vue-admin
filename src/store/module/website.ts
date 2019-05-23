@@ -29,7 +29,7 @@ const actions: ActionTree<WebsiteState, any> = {
     commit('UPDATE_STATE', data)
   }
   // GET_DATA_ASYN({ commit, state: LoginState }) {
-  //   Website.getData()
+  //   // WebsiteApi.category()
   // }
 }
 

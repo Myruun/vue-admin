@@ -8,8 +8,7 @@
 
         <div>
           <el-input
-            style=" padding: 3px 0;width:140px;margin-left:10px;"
-            v-model="input"
+            style="padding: 3px 0;width:140px;margin-left:10px;"
             placeholder="请输入网站名称"
           ></el-input>
           <el-select
@@ -40,17 +39,16 @@
           :data="tableData"
           tooltip-effect="dark"
           style="width: 100%"
-          @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55"> </el-table-column>
-          <el-table-column label="日期" width="120">
-            <template slot-scope="scope">{{ scope.row.date }}</template>
+          <el-table-column label="日期" width="160">
+            <template slot-scope="scope">{{ scope.row.add_time }}</template>
           </el-table-column>
-          <el-table-column prop="name" label="网站名称" width="160">
+          <el-table-column prop="url_title" label="网站名称" width="160">
           </el-table-column>
           <el-table-column label="网站徽标" width="100" show-overflow-tooltip>
             <template slot-scope="scope">
-              <img :src="scope.row.address" alt="" srcset="" />
+              <img :src="scope.row.url_img" alt="" srcset="" />
             </template>
           </el-table-column>
 
@@ -136,10 +134,7 @@ export default class About extends Vue {
     region: "",
     date1: "",
     date2: "",
-    delivery: false,
-    type: [],
-    resource: "",
-    desc: ""
+    delivery: false
   };
   dialogFormVisible: boolean = false;
   formLabelWidth: any = "75px";
@@ -165,74 +160,7 @@ export default class About extends Vue {
       label: "北京烤鸭"
     }
   ];
-  tableData: any = [
-    {
-      date: "2016-05-03",
-      name: "王小虎",
-      address: "http://pic37.nipic.com/20140110/17563091_221827492154_2.jpg",
-      url: "http://wwww.baidu.com"
-    },
-    {
-      date: "2016-05-03",
-      name: "王小虎",
-      address: "http://pic37.nipic.com/20140110/17563091_221827492154_2.jpg",
-      url: "http://wwww.baidu.com"
-    },
-    {
-      date: "2016-05-03",
-      name: "王小虎",
-      address: "http://pic37.nipic.com/20140110/17563091_221827492154_2.jpg",
-      url: "http://wwww.baidu.com"
-    },
-    {
-      date: "2016-05-03",
-      name: "王小虎",
-      address: "http://pic37.nipic.com/20140110/17563091_221827492154_2.jpg",
-      url: "http://wwww.baidu.com"
-    },
-    {
-      date: "2016-05-03",
-      name: "王小虎",
-      address: "http://pic37.nipic.com/20140110/17563091_221827492154_2.jpg",
-      url: "http://wwww.baidu.com"
-    },
-    {
-      date: "2016-05-03",
-      name: "王小虎",
-      address: "http://pic37.nipic.com/20140110/17563091_221827492154_2.jpg",
-      url: "http://wwww.baidu.com"
-    },
-    {
-      date: "2016-05-03",
-      name: "王小虎",
-      address: "http://pic37.nipic.com/20140110/17563091_221827492154_2.jpg",
-      url: "http://wwww.baidu.com"
-    },
-    {
-      date: "2016-05-03",
-      name: "王小虎",
-      address: "http://pic37.nipic.com/20140110/17563091_221827492154_2.jpg",
-      url: "http://wwww.baidu.com"
-    },
-    {
-      date: "2016-05-03",
-      name: "王小虎",
-      address: "http://pic37.nipic.com/20140110/17563091_221827492154_2.jpg",
-      url: "http://wwww.baidu.com"
-    },
-    {
-      date: "2016-05-03",
-      name: "王小虎",
-      address: "http://pic37.nipic.com/20140110/17563091_221827492154_2.jpg",
-      url: "http://wwww.baidu.com"
-    },
-    {
-      date: "2016-05-03",
-      name: "王小虎",
-      address: "http://pic37.nipic.com/20140110/17563091_221827492154_2.jpg",
-      url: "http://wwww.baidu.com"
-    }
-  ];
+  tableData: any = [];
   @Prop({
     required: false,
     default: ""
@@ -242,9 +170,38 @@ export default class About extends Vue {
   // data
 
   created() {
-    //
+    this.showcategory();
   }
 
+  addcategory() {
+    this.dialogFormVisible = false;
+    // this.axios
+    //   .post(
+    //     'http://hn2.api.okayapi.com/?&service=App.Table.Create&model_name=home_search&data={"web_title":"' +
+    //       this.title +
+    //       '"}&app_key=591EDA6AB41AD46668F1D94A0EBDDC3B&sign=5E405D8F1DD072CBD85A8A2C611DF10C'
+    //   )
+    //   .then(response => {
+    //     this.showcategory();
+    //   })
+    //   .catch(response => {
+    //     console.log(response);
+    //   });
+  }
+  showcategory() {
+    //
+    this.axios
+      .get(
+        'http://hn2.api.okayapi.com/?&service=App.Table.FreeQuery&model_name=home_search&page=1&perpage=10&where=[["id",">",0]]&app_key=591EDA6AB41AD46668F1D94A0EBDDC3B'
+      )
+      .then(response => {
+        this.tableData = response.data.data.list;
+        console.log(1);
+      })
+      .catch(response => {
+        console.log(response);
+      });
+  }
   activated() {
     //
   }

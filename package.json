@@ -12,6 +12,7 @@
     "com": "node scripts/component"
   },
   "dependencies": {
+    "@types/qs": "^6.5.3",
     "@types/webpack-env": "^1.13.9",
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
@@ -20,6 +21,7 @@
     "js-cookie": "^2.2.0",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
+    "vue-axios": "^2.1.4",
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.3",

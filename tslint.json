@@ -22,7 +22,7 @@
     "forin": false,
     "import-blacklist": true,
     "no-arg": true,
-    "no-bitwise": true,
+    "no-bitwise": false,
     "no-console": false,
     "no-construct": true,
     "no-debugger": true,
@@ -34,7 +34,7 @@
     "no-implicit-dependencies": false,
     "no-inferred-empty-object-type": false,
     "no-invalid-template-strings": true,
-    "no-invalid-this": true,
+    "no-invalid-this": false,
     "no-misused-new": true,
     "no-null-keyword": false,
     "no-object-literal-type-assertion": false,
@@ -42,6 +42,7 @@
     "arrow-parens": false,
     "adjacent-overload-signatures": false,
     "ban-comma-operator": true,
+    "space-before-function-paren": false,
     "no-any": false,
     "no-empty-interface": true,
     "no-internal-module": true,
@@ -56,6 +57,7 @@
     "promise-function-async": false,
     "max-classes-per-file": [true, 2],
     "variable-name": false,
+    "no-duplicate-variable": true,
     "prefer-const": false
   }
 }

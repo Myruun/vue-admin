@@ -84,7 +84,7 @@ const aside = new Router({
     },
     {
       path: '/install',
-      name: '设置',
+      name: '系统设置',
       component: () => import('@/views/installs/index.vue'),
       meta: {
         icon: 'icon-shezhi',

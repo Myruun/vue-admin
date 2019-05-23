@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, axios)
+
 import store from './store/index'
 import '@/assets/scss/common.scss'
 import '@/assets/css/iconfont.css'

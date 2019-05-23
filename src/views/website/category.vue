@@ -16,19 +16,20 @@
       <div class="text item">
         <el-table
           ref="multipleTable"
-          :data="tableData"
+          :data="category"
           tooltip-effect="dark"
           style="width: 100%"
-          @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" width="55"> </el-table-column>
-          <el-table-column label="日期" width="120">
-            <template slot-scope="scope">{{ scope.row.date }}</template>
+          <el-table-column label="日期" width="160">
+            <template slot-scope="scope">
+              <span v-text="scope.row.add_time"></span
+            ></template>
           </el-table-column>
           <el-table-column label="类别名称" show-overflow-tooltip>
             <template slot-scope="scope">
               <!-- <img :src="scope.row.address" alt="" srcset="" /> -->
-              <span>类别</span>
+              <span v-text="scope.row.web_title"></span>
             </template>
           </el-table-column>
 
@@ -40,22 +41,20 @@
           </el-table-column>
         </el-table>
 
-        <el-pagination background layout="prev, pager, next" :total="1000">
-        </el-pagination>
+        <!-- <el-pagination background layout="prev, pager, next" :total="1000">
+        </el-pagination> -->
       </div>
     </el-card>
 
     <el-dialog title="类别添加" :visible.sync="dialogFormVisible">
-      <el-form :model="form">
+      <el-form>
         <el-form-item label="类别名称" :label-width="formLabelWidth">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+          <el-input v-model="title" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false"
-          >确 定</el-button
-        >
+        <el-button type="primary" @click="addcategory">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -66,21 +65,13 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { Getter, Action } from "vuex-class";
 import { WebsiteData } from "@/types/views/website.interface";
+// import { category } from "@/api/website";
 
 @Component({})
 export default class About extends Vue {
   // prop
   value: any = "";
-  form: any = {
-    name: "",
-    region: "",
-    date1: "",
-    date2: "",
-    delivery: false,
-    type: [],
-    resource: "",
-    desc: ""
-  };
+  title: any = "";
   dialogFormVisible: boolean = false;
   formLabelWidth: any = "75px";
   options: any = [
@@ -105,21 +96,44 @@ export default class About extends Vue {
       label: "北京烤鸭"
     }
   ];
-  tableData: any = [];
+  category: any = [];
   @Prop({
     required: false,
     default: ""
   })
   name!: string;
 
-  // data
-
   created() {
-    //
+    this.showcategory();
   }
 
-  activated() {
+  addcategory() {
+    this.dialogFormVisible = false;
+    this.axios
+      .post(
+        'http://hn2.api.okayapi.com/?&service=App.Table.Create&model_name=home_category&data={"web_title":"' +
+          this.title +
+          '"}&app_key=591EDA6AB41AD46668F1D94A0EBDDC3B&sign=5E405D8F1DD072CBD85A8A2C611DF10C'
+      )
+      .then(response => {
+        this.showcategory();
+      })
+      .catch(response => {
+        console.log(response);
+      });
+  }
+  showcategory() {
     //
+    this.axios
+      .get(
+        'http://hn2.api.okayapi.com/?&service=App.Table.FreeQuery&model_name=home_category&page=1&perpage=10&where=[["id",">",0]]&app_key=591EDA6AB41AD46668F1D94A0EBDDC3B'
+      )
+      .then(response => {
+        this.category = response.data.data.list;
+      })
+      .catch(response => {
+        console.log(response);
+      });
   }
 
   mounted() {

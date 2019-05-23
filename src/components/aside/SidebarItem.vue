@@ -66,19 +66,19 @@ export default {
     genPath () {
       let arr = [...arguments]
       let path = arr.map(v => {
-        while (v[0] === '/') {
-          v = v.substring(1)
+        let data = v;
+        while (data[0] === '/') {
+          data = data.substring(1)
         }
-        while (v[-1] === '/') {
-          v = v.substring(0, v.length)
-
+        while (data[-1] === '/') {
+          data = data.substring(0, data.length)
         }
-        return v
+        // console.log(data)
+        return data
       }).join('/')
-
       path = path[0] === '/' ? path : '/' + path
-
-      console.log(path)
+      let index = path.lastIndexOf("\/");
+      path = path.substring(index + 1, path.length);
       return path
     }
   }
