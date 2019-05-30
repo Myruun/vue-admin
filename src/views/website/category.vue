@@ -34,8 +34,12 @@
           </el-table-column>
 
           <el-table-column label="操作" width="210" show-overflow-tooltip>
-            <template>
-              <el-button size="mini">编辑</el-button>
+            <template slot-scope="scope">
+              <el-button
+                size="mini"
+                @click="edit(scope.row.id, scope.row.web_title)"
+                >编辑</el-button
+              >
               <el-button size="mini" type="danger">删除</el-button>
             </template>
           </el-table-column>
@@ -57,6 +61,20 @@
         <el-button type="primary" @click="addcategory">确 定</el-button>
       </div>
     </el-dialog>
+
+    <el-dialog title="类别编辑" :visible.sync="dialogdataVisible">
+      <el-form>
+        <el-form-item label="类别名称" :label-width="formLabelWidth">
+          <el-input v-model="edittitle" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogdataVisible = false">取 消</el-button>
+        <el-button type="primary" @click="getedit(editid, edittitle)"
+          >确 定</el-button
+        >
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -65,15 +83,19 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import { Getter, Action } from "vuex-class";
 import { WebsiteData } from "@/types/views/website.interface";
-// import { category } from "@/api/website";
 
 @Component({})
 export default class About extends Vue {
   // prop
   value: any = "";
   title: any = "";
+  editid: any = "";
+  edittitle: any = "";
   dialogFormVisible: boolean = false;
+  dialogdataVisible: boolean = false;
+  perpage: number = 10;
   formLabelWidth: any = "75px";
+
   options: any = [
     {
       value: "选项1",
@@ -106,7 +128,44 @@ export default class About extends Vue {
   created() {
     this.showcategory();
   }
-
+  edit(id: any, name: any) {
+    this.dialogdataVisible = true;
+    this.editid = id;
+    this.edittitle = name;
+    // console.log(id);
+    // this.axios
+    //   .post(
+    //     "http://hn2.api.okayapi.com/?&service=App.Table.ChangeNumber&model_name=home_category&id=" +
+    //       id +
+    //       "&change_field=web_title&change_value=" +
+    //       this.edittitle +
+    //       '"}&app_key=591EDA6AB41AD46668F1D94A0EBDDC3B&sign=5E405D8F1DD072CBD85A8A2C611DF10C'
+    //   )
+    //   .then(response => {
+    //     this.showcategory();
+    //     this.dialogdataVisible = false;
+    //   })
+    //   .catch(response => {
+    //     console.log(response);
+    //   });
+  }
+  getedit(id: any, name: any) {
+    this.axios
+      .post(
+        'http://hn2.api.okayapi.com/?&service=App.Table.FreeUpdate&model_name=home_category&logic=and&where=[["id", "=", "' +
+          id +
+          '"]]&data={"web_title":"' +
+          name +
+          '"}&app_key=591EDA6AB41AD46668F1D94A0EBDDC3B&sign=5E405D8F1DD072CBD85A8A2C611DF10C'
+      )
+      .then(response => {
+        this.showcategory();
+        this.dialogdataVisible = false;
+      })
+      .catch(response => {
+        console.log(response);
+      });
+  }
   addcategory() {
     this.dialogFormVisible = false;
     this.axios
@@ -126,7 +185,9 @@ export default class About extends Vue {
     //
     this.axios
       .get(
-        'http://hn2.api.okayapi.com/?&service=App.Table.FreeQuery&model_name=home_category&page=1&perpage=10&where=[["id",">",0]]&app_key=591EDA6AB41AD46668F1D94A0EBDDC3B'
+        "http://hn2.api.okayapi.com/?&service=App.Table.FreeQuery&model_name=home_category&page=1&perpage=" +
+          this.perpage +
+          '&where=[["id",">",0]]&app_key=591EDA6AB41AD46668F1D94A0EBDDC3B'
       )
       .then(response => {
         this.category = response.data.data.list;

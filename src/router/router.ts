@@ -36,7 +36,7 @@ export default [
         }
       },
       {
-        path: '/websitelist',
+        path: '/website/websitelist',
         name: 'website',
         component: () => import('@/views/website/index.vue'),
         meta: {
@@ -45,7 +45,7 @@ export default [
         }
       },
       {
-        path: '/category',
+        path: '/website/category',
         name: 'category',
         component: () => import('@/views/website/category.vue'),
         meta: {

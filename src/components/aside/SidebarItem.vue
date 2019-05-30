@@ -77,8 +77,12 @@ export default {
         return data
       }).join('/')
       path = path[0] === '/' ? path : '/' + path
-      let index = path.lastIndexOf("\/");
-      path = path.substring(index + 1, path.length);
+      // let index = path.lastIndexOf("\/");
+      // if (index) {
+      //   path = path.substring(index + 1, path.length);
+      // }
+      // console.log(index)
+      // path = path.substring(index + 1, path.length);
       return path
     }
   }
