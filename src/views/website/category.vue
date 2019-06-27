@@ -80,48 +80,48 @@
 
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
-import { Getter, Action } from "vuex-class";
-import { WebsiteData } from "@/types/views/website.interface";
+import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Getter, Action } from 'vuex-class';
+import { WebsiteData } from '@/types/views/website.interface';
 
 @Component({})
 export default class About extends Vue {
   // prop
-  value: any = "";
-  title: any = "";
-  editid: any = "";
-  edittitle: any = "";
+  value: any = '';
+  title: any = '';
+  editid: any = '';
+  edittitle: any = '';
   dialogFormVisible: boolean = false;
   dialogdataVisible: boolean = false;
   perpage: number = 10;
-  formLabelWidth: any = "75px";
+  formLabelWidth: any = '75px';
 
   options: any = [
     {
-      value: "选项1",
-      label: "黄金糕"
+      value: '选项1',
+      label: '黄金糕'
     },
     {
-      value: "选项2",
-      label: "双皮奶"
+      value: '选项2',
+      label: '双皮奶'
     },
     {
-      value: "选项3",
-      label: "蚵仔煎"
+      value: '选项3',
+      label: '蚵仔煎'
     },
     {
-      value: "选项4",
-      label: "龙须面"
+      value: '选项4',
+      label: '龙须面'
     },
     {
-      value: "选项5",
-      label: "北京烤鸭"
+      value: '选项5',
+      label: '北京烤鸭'
     }
   ];
   category: any = [];
   @Prop({
     required: false,
-    default: ""
+    default: ''
   })
   name!: string;
 
@@ -185,7 +185,7 @@ export default class About extends Vue {
     //
     this.axios
       .get(
-        "http://hn2.api.okayapi.com/?&service=App.Table.FreeQuery&model_name=home_category&page=1&perpage=" +
+        'http://hn2.api.okayapi.com/?&service=App.Table.FreeQuery&model_name=home_category&page=1&perpage=' +
           this.perpage +
           '&where=[["id",">",0]]&app_key=591EDA6AB41AD46668F1D94A0EBDDC3B'
       )
@@ -204,7 +204,7 @@ export default class About extends Vue {
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/variables.scss";
+@import '@/assets/scss/variables.scss';
 
 .website-wrap {
   width: 100%;
