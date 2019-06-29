@@ -8,6 +8,8 @@ Vue.use(VueAxios, axios)
 
 import store from './store/index'
 import '@/assets/scss/common.scss'
+import '@/assets/scss/public.scss'
+
 import '@/assets/css/iconfont.css'
 import './plugins/element.js'
 

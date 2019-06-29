@@ -62,7 +62,7 @@ export default {
     },
   },
   methods: {
-    // 生成侧边栏路由，格式: /a/b / c
+    // 生成侧边栏路由，格式: /a/b/c
     genPath () {
       let arr = [...arguments]
       let path = arr.map(v => {
@@ -76,6 +76,7 @@ export default {
         // console.log(data)
         return data
       }).join('/')
+
       path = path[0] === '/' ? path : '/' + path
       // let index = path.lastIndexOf("\/");
       // if (index) {

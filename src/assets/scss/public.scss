@@ -1,0 +1,63 @@
+//图片比例
+.zoomImage {
+ width: 100%;
+ height: 0;
+ overflow: hidden;
+ background-position: center center;
+ background-repeat: no-repeat;
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ background-size: cover;
+}
+
+//1:1
+.zoom-1-1 {
+ padding-bottom: 100%;
+}
+
+//4:3
+.zoom-4-3 {
+ padding-bottom: 75%;
+}
+
+//16:9
+.zoom-16-9 {
+ padding-bottom: 56.25%;
+}
+
+.ellipsis {
+ .ellipsis_p {
+  position: relative;
+  text-align: justify;
+  line-height: 20px; //可变
+  max-height: 57px; //可变
+  overflow: hidden;
+  width: 100%; //可变
+ }
+
+ .ellipsis_p::after {
+  content: "...";
+  position: absolute;
+  bottom: 0;
+  right: 7px; //可变
+  padding-right: 80px; //可变<br>　　　　　//兼容性处理
+  background: -webkit-linear-gradient(left, transparent, #fff 0%);
+  background: -o-linear-gradient(right, transparent, #fff 0%);
+  background: -moz-linear-gradient(right, transparent, #fff 0%);
+  background: linear-gradient(to right, transparent, #fff 0%);
+ }
+}
+
+p {
+ color: #666666;
+}
+
+.el-badge__content {
+ right: 10px !important;
+ top: 10px !important;
+}
+
+.whole {
+ width: 100%;
+ box-sizing: border-box;
+}

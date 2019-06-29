@@ -48,13 +48,12 @@ export default {
   },
   created () {
     this.router = aside.options.routes
-    // console.log(city())
   }
 }
  </script>
 
 <style lang="scss">
-@import "@/assets/scss/variables.scss";
+@import '@/assets/scss/variables.scss';
 .four-wrap {
   width: 100%;
   height: 100%;

@@ -29,12 +29,16 @@
                   <el-input placeholder="请输入验证码"> </el-input>
                   <p></p>
                 </el-col>
-                <el-col :span="4">
+                <el-col :span="3">
                   <p></p>
                 </el-col>
 
-                <el-col :span="8">
-                  <el-button type="primary">获取验证码</el-button>
+                <el-col :span="9">
+                  <el-button
+                    type="primary"
+                    @click="verification_code"
+                    v-text="code"
+                  ></el-button>
                 </el-col>
               </el-row>
 
@@ -53,14 +57,17 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import { Getter, Action } from "vuex-class";
-import { LoginData } from "@/types/views/login.interface";
+import { Component, Vue } from 'vue-property-decorator';
+import { Getter, Action } from 'vuex-class';
+import { LoginData } from '@/types/views/login.interface';
 // import {  } from "@/components" // 组件
 
 @Component({})
 export default class About extends Vue {
   isShow: boolean = true;
+  time: number = 3;
+  code: string = '获取验证码';
+  is_click: boolean = false;
   created() {
     //
   }
@@ -68,15 +75,36 @@ export default class About extends Vue {
     // this.$store
     //   .dispatch("LoginByUsername")
     //   .then(() => {
-    this.$router.push({ path: "/404" });
+    this.$router.push({ path: '/404' });
     // })
     // .catch(err => {
     //   // this.$message.error(err); //登录失败提示错误
-    console.log("zhixing");
+    console.log('zhixing');
     // });
   }
   switchtab() {
     this.isShow = !this.isShow;
+  }
+  verification_code() {
+    // 验证码
+    // let that = this;
+    // console.log(that.time);
+    // if (that.is_click) {
+    //   that.is_click = false;
+    // } else {
+    //   // that.is_click = true;
+    //   // let Count_down = setInterval(function() {
+    //   //   that.time--;
+    //   //   console.log(that.time);
+    //   //   that.code = '重新发送' + that.time + '秒';
+    //   //   if (that.time === 0) {
+    //   //     that.code = '获取验证码';
+    //   //     that.time = 3;
+    //   //     that.is_click = true;
+    //   //     clearInterval(Count_down);
+    //   //   }
+    //   }, 1000);
+    // }
   }
   mounted() {
     //
@@ -89,7 +117,7 @@ export default class About extends Vue {
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/variables.scss";
+@import '@/assets/scss/variables.scss';
 
 .login-wrap {
   width: 100%;

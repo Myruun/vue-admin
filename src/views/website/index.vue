@@ -33,7 +33,7 @@
           >
         </div>
       </div>
-      <div class="text item">
+      <div class="text item ">
         <el-table
           ref="multipleTable"
           :data="tableData"
@@ -120,50 +120,50 @@
 
 
 <script lang="ts">
-import { Component, Vue, Prop } from "vue-property-decorator";
-import { Getter, Action } from "vuex-class";
-import { WebsiteData } from "@/types/views/website.interface";
+import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Getter, Action } from 'vuex-class';
+import { WebsiteData } from '@/types/views/website.interface';
 // import {  } from "@/components" // 组件
 // import js from "@/compo/data.js" // 组件
 @Component({})
 export default class About extends Vue {
   // prop
-  value: any = "";
+  value: any = '';
   form: any = {
-    name: "",
-    region: "",
-    date1: "",
-    date2: "",
+    name: '',
+    region: '',
+    date1: '',
+    date2: '',
     delivery: false
   };
   dialogFormVisible: boolean = false;
-  formLabelWidth: any = "75px";
+  formLabelWidth: any = '75px';
   options: any = [
     {
-      value: "选项1",
-      label: "黄金糕"
+      value: '选项1',
+      label: '黄金糕'
     },
     {
-      value: "选项2",
-      label: "双皮奶"
+      value: '选项2',
+      label: '双皮奶'
     },
     {
-      value: "选项3",
-      label: "蚵仔煎"
+      value: '选项3',
+      label: '蚵仔煎'
     },
     {
-      value: "选项4",
-      label: "龙须面"
+      value: '选项4',
+      label: '龙须面'
     },
     {
-      value: "选项5",
-      label: "北京烤鸭"
+      value: '选项5',
+      label: '北京烤鸭'
     }
   ];
   tableData: any = [];
   @Prop({
     required: false,
-    default: ""
+    default: ''
   })
   name!: string;
 
@@ -213,23 +213,24 @@ export default class About extends Vue {
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/variables.scss";
-
+@import '@/assets/scss/variables.scss';
 .website-wrap {
   width: 100%;
   background: #fff;
   position: relative;
+  .item {
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
 }
-img {
-  width: 20px;
-  height: 20px;
-}
+
 .el-pagination {
   position: relative;
   right: 0px;
   padding: 10px 0px;
   text-align: right;
-  // float: right;
 }
 .el-card__body {
   padding: 0px;
