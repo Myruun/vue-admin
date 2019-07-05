@@ -1,6 +1,8 @@
 <template>
   <div class="Rich_text-wrap">
-    <div class="Rich_text_nav"></div>
+    <div class="Rich_text_nav">
+      <i class="iconfont"></i>
+    </div>
     <div class="Rich_text_content" contenteditable="true"></div>
   </div>
 </template>

@@ -2,19 +2,21 @@
   <div class="blog-wrap">
     <div class="blog_content">
       <el-card class="box-card">
-        <div slot="header" class="clearfix flex items">
+        <div slot="header" class="flex items">
           <div>博客列表</div>
           <!-- <el-button style="float: right; padding: 3px 0" type="text"
             >操作按钮</el-button
           > -->
-
           <div>
-            <el-button type="primary">查询</el-button>
-
-            <el-button type="primary">添加</el-button>
+            <el-button type="primary" style="margin-right:20px;"
+              >查询</el-button
+            >
+            <router-link to="/website/blogadd">
+              <el-button type="primary">添加</el-button></router-link
+            >
           </div>
         </div>
-        <el-row :gutter="20">
+        <el-row :gutter="20" style="margin:0px">
           <el-col
             :xs="24"
             :sm="12"
@@ -26,14 +28,12 @@
           >
             <div class="blog_list bg-purple ">
               <div class="zoomImage blog_img">
-                <img :src="item.img" alt="" srcset="" />
-                <h2 v-text="item.title"></h2>
+                <img :src="item.blog_img" alt="" srcset="" />
+                <h2 v-text="item.blog_title"></h2>
               </div>
 
               <div class="blog_content_s">
-                <p class="ellipsis">
-                  时间在变，人也在变。生命是一场无法回放的绝版电影，有些事，不管你如何努力，回不去就是回不去了。就算真的回去了，你也会发现，一切已经面目全非。唯一能回去的，只是存于心底的记忆。世界上最远的距离，不是爱，不是恨，而是熟悉的人，渐渐变得陌生。
-                </p>
+                <p class="ellipsis" v-text="item.synopsis"></p>
                 <el-divider></el-divider>
                 <div class="whole flex state">
                   <el-tooltip
@@ -42,7 +42,10 @@
                     content="置顶"
                     placement="top"
                   >
-                    <i class="iconfont icon-zhiding"></i>
+                    <i
+                      class="iconfont icon-zhiding"
+                      :class="item.istop ? 'active' : ''"
+                    ></i>
                   </el-tooltip>
 
                   <el-tooltip
@@ -51,7 +54,10 @@
                     content="推荐"
                     placement="top"
                   >
-                    <i class="iconfont icon-tuijian"></i>
+                    <i
+                      class="iconfont icon-tuijian"
+                      :class="item.recommend ? 'active' : ''"
+                    ></i>
                   </el-tooltip>
 
                   <el-tooltip
@@ -60,7 +66,10 @@
                     content="热门"
                     placement="top"
                   >
-                    <i class="iconfont icon-remen"></i>
+                    <i
+                      class="iconfont icon-remen"
+                      :class="item.hot ? 'active' : ''"
+                    ></i>
                   </el-tooltip>
 
                   <el-tooltip
@@ -69,7 +78,10 @@
                     content="轮播图"
                     placement="top"
                   >
-                    <i class="iconfont icon-zhaopian"></i>
+                    <i
+                      class="iconfont icon-zhaopian"
+                      :class="item.slide ? 'active' : ''"
+                    ></i>
                   </el-tooltip>
                 </div>
                 <el-divider></el-divider>
@@ -77,7 +89,7 @@
                   <p class="author">by: <span v-text="item.author"></span></p>
 
                   <div>
-                    <i class="iconfont icon-trash"></i>
+                    <i class="iconfont icon-trash" @click="deletes"></i>
 
                     <i class="iconfont icon-bijinotes23"></i>
                   </div>
@@ -101,84 +113,51 @@ import { BlogData } from '@/types/views/blog.interface';
 @Component({})
 export default class About extends Vue {
   // prop
-  id: any = 1;
-  name: string = '秦帜楠';
-  sex: any = '男';
-  age: any = 35;
-  census_register: string = '吉林省长春市市辖区';
-  Identity_id: any = '220101198310120534';
-  list: any = [
-    {
-      img:
-        'https://img.zcool.cn/community/017b495b037370a801209a85763b91.jpeg@260w_195h_1c_1e_1o_100sh.jpg',
-      title: '扁平插画',
-      author: '飞翔的兔子',
-      is_display: true
-    },
-    {
-      img:
-        'https://img.zcool.cn/community/01bb4f5ce50c94a801208f8b435de8.jpg@260w_195h_1c_1e_1o_100sh.jpg',
-      title: '扁平插画',
-      author: '飞翔的兔子',
-      is_display: true
-    },
-    {
-      img:
-        'https://img.zcool.cn/community/01b4ac5cb99a4da80121416877d028.jpg@260w_195h_1c_1e_1o_100sh.jpg',
-      title: '扁平插画',
-      author: '飞翔的兔子',
-      is_display: true
-    },
-    {
-      img:
-        'https://img.zcool.cn/community/015b385caf0915a801214168f4ca9d.jpg@260w_195h_1c_1e_1o_100sh.jpg',
-      title: '扁平插画',
-      author: '飞翔的兔子',
-      is_display: true
-    },
-    {
-      img:
-        'https://img.zcool.cn/community/01f5cd5acdb9e5a801204029be80a3.jpeg@260w_195h_1c_1e_1o_100sh.jpg',
-      title: '咆哮的野牛',
-      author: '飞翔的兔子',
-      is_display: true
-    },
-    {
-      img:
-        'https://img.zcool.cn/community/01bbee5b50650ba80121ade0671801.jpeg@260w_195h_1c_1e_1o_100sh.jpg',
-      title: '飞越的鲸鱼鲸鱼',
-      author: '飞翔的兔子',
-      is_display: true
-    },
-    {
-      img:
-        'https://img.zcool.cn/community/01b29f5c9dbe55a801208f8b854990.jpg@260w_195h_1c_1e_1o_100sh.jpg',
-      title: '扁平插画',
-      author: '飞翔的兔子',
-      is_display: true
-    }
-  ];
+  list: any = [];
   @Prop({
     required: false,
     default: ''
   })
-  // onsubmit() {
-  //   const that = this;
-  //   // this.axios
-  //   //   .delete(`/admin/deluser/` + that.id)
-  //   //   .then(res => {
-  //   //     console.log(res);
-  //   //   })
-  //   //   .catch(response => {
-  //   //     console.log(response);
-  //   //   });
-  // }
-  created() {
-    //
+  deletes() {
+    // 删除操作
+    let that = this;
+    that
+      .$confirm('此操作将永久删除该博客, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+      .then(() => {
+        // this.$message({
+        //   type: 'success',
+        //   message: '删除成功!'
+        // });
+        // myThis:any = this
+        this.$message({
+        type: 'success',
+        message: '已收藏'
+      })
+      })
+      .catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
   }
 
-  activated() {
-    //
+  created() {
+    // 生命周期
+    let that = this;
+    that.axios
+      .get(`/api/bloglist`)
+      .then((res: any) => {
+        console.log(res);
+        that.list = res.data;
+      })
+      .catch((response: any) => {
+        console.log(response);
+      });
   }
 
   mounted() {
@@ -187,7 +166,7 @@ export default class About extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/assets/scss/variables.scss';
 
 .blog-wrap {
@@ -210,7 +189,6 @@ export default class About extends Vue {
     }
   }
   .ellipsis {
-    // padding-top: 7px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
@@ -308,5 +286,10 @@ export default class About extends Vue {
 }
 .el-divider--horizontal {
   margin: 0px 0;
+}
+
+.active {
+  // color: red !i;
+  color: $theme !important;
 }
 </style>

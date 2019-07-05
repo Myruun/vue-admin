@@ -1,7 +1,7 @@
 <template>
   <div class="website-wrap">
     <el-card class="box-card">
-      <div slot="header" class="clearfix flex">
+      <div slot="header" class=" flex">
         <div>
           网站管理
         </div>
@@ -190,17 +190,18 @@ export default class About extends Vue {
   }
   showcategory() {
     //
-    this.axios
-      .get(
-        'http://hn2.api.okayapi.com/?&service=App.Table.FreeQuery&model_name=home_search&page=1&perpage=10&where=[["id",">",0]]&app_key=591EDA6AB41AD46668F1D94A0EBDDC3B'
-      )
-      .then(response => {
-        this.tableData = response.data.data.list;
-        console.log(1);
-      })
-      .catch(response => {
-        console.log(response);
-      });
+    // this.axios
+    //   .get(
+    //     'http://hn2.api.okayapi.com/?&service=App.Table.FreeQuery&model_name=
+    // home_search&page=1&perpage=10&where=[["id",">",0]]&app_key=591EDA6AB41AD46668F1D94A0EBDDC3B'
+    //   )
+    //   .then(response => {
+    //     this.tableData = response.data.data.list;
+    //     console.log(1);
+    //   })
+    //   .catch(response => {
+    //     console.log(response);
+    //   });
   }
   activated() {
     //
@@ -212,7 +213,7 @@ export default class About extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/assets/scss/variables.scss';
 .website-wrap {
   width: 100%;

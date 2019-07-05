@@ -166,6 +166,7 @@ export default class Index extends Vue {
     color: #333;
     display: flex;
     padding-left: 0px;
+    border-bottom: 1px solid #dfdfdd;
     justify-content: space-between;
     align-items: center;
     .right_body {

@@ -1,7 +1,7 @@
 <template>
   <div class="website-wrap">
     <el-card class="box-card">
-      <div slot="header" class="clearfix flex">
+      <div slot="header" class="flex">
         <div>
           网站类别
         </div>
@@ -150,21 +150,22 @@ export default class About extends Vue {
     //   });
   }
   getedit(id: any, name: any) {
-    this.axios
-      .post(
-        'http://hn2.api.okayapi.com/?&service=App.Table.FreeUpdate&model_name=home_category&logic=and&where=[["id", "=", "' +
-          id +
-          '"]]&data={"web_title":"' +
-          name +
-          '"}&app_key=591EDA6AB41AD46668F1D94A0EBDDC3B&sign=5E405D8F1DD072CBD85A8A2C611DF10C'
-      )
-      .then(response => {
-        this.showcategory();
-        this.dialogdataVisible = false;
-      })
-      .catch(response => {
-        console.log(response);
-      });
+    // this.axios
+    //   .post(
+    //     'http://hn2.api.okayapi.com/?&service=
+    // App.Table.FreeUpdate&model_name=home_category&logic=and&where=[["id", "=", "' +
+    //       id +
+    //       '"]]&data={"web_title":"' +
+    //       name +
+    //       '"}&app_key=591EDA6AB41AD46668F1D94A0EBDDC3B&sign=5E405D8F1DD072CBD85A8A2C611DF10C'
+    //   )
+    //   .then(response => {
+    //     this.showcategory();
+    //     this.dialogdataVisible = false;
+    //   })
+    //   .catch(response => {
+    //     console.log(response);
+    //   });
   }
   addcategory() {
     this.dialogFormVisible = false;
@@ -203,7 +204,7 @@ export default class About extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/assets/scss/variables.scss';
 
 .website-wrap {

@@ -36,6 +36,15 @@ export default [
         }
       },
       {
+       path: '/website/blogadd',
+       name: 'website',
+       component: () => import('@/views/blog/blogadd.vue'),
+       meta: {
+         icon: 'icon-shuju',
+         keepAlive: true
+       }
+     },
+      {
         path: '/website/websitelist',
         name: 'website',
         component: () => import('@/views/website/index.vue'),

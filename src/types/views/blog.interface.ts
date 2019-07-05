@@ -1,6 +1,7 @@
 // blog.Data 参数类型
 export interface BlogData {
-  pageName: string
+  pageName: string;
+  message: string
 }
 
 // VUEX blog.State 参数类型
