@@ -2,7 +2,7 @@
   <div class="blog-wrap">
     <div class="blog_content">
       <el-card class="box-card">
-        <div slot="header" class="flex items">
+        <div slot="header" class="flex items" v-once>
           <div>博客列表</div>
           <!-- <el-button style="float: right; padding: 3px 0" type="text"
             >操作按钮</el-button
@@ -34,64 +34,66 @@
 
               <div class="blog_content_s">
                 <p class="ellipsis" v-text="item.synopsis"></p>
-                <el-divider></el-divider>
-                <div class="whole flex state">
-                  <el-tooltip
-                    class="item"
-                    effect="dark"
-                    content="置顶"
-                    placement="top"
-                  >
-                    <i
-                      class="iconfont icon-zhiding"
-                      :class="item.istop ? 'active' : ''"
-                    ></i>
-                  </el-tooltip>
+                <div class="whole">
+                  <el-divider></el-divider>
+                  <div class="whole flex state">
+                    <el-tooltip
+                      class="item"
+                      effect="dark"
+                      content="置顶"
+                      placement="top"
+                    >
+                      <i
+                        class="iconfont icon-zhiding"
+                        :class="item.istop ? 'active' : ''"
+                      ></i>
+                    </el-tooltip>
 
-                  <el-tooltip
-                    class="item"
-                    effect="dark"
-                    content="推荐"
-                    placement="top"
-                  >
-                    <i
-                      class="iconfont icon-tuijian"
-                      :class="item.recommend ? 'active' : ''"
-                    ></i>
-                  </el-tooltip>
+                    <el-tooltip
+                      class="item"
+                      effect="dark"
+                      content="推荐"
+                      placement="top"
+                    >
+                      <i
+                        class="iconfont icon-tuijian"
+                        :class="item.recommend ? 'active' : ''"
+                      ></i>
+                    </el-tooltip>
 
-                  <el-tooltip
-                    class="item"
-                    effect="dark"
-                    content="热门"
-                    placement="top"
-                  >
-                    <i
-                      class="iconfont icon-remen"
-                      :class="item.hot ? 'active' : ''"
-                    ></i>
-                  </el-tooltip>
+                    <el-tooltip
+                      class="item"
+                      effect="dark"
+                      content="热门"
+                      placement="top"
+                    >
+                      <i
+                        class="iconfont icon-remen"
+                        :class="item.hot ? 'active' : ''"
+                      ></i>
+                    </el-tooltip>
 
-                  <el-tooltip
-                    class="item"
-                    effect="dark"
-                    content="轮播图"
-                    placement="top"
-                  >
-                    <i
-                      class="iconfont icon-zhaopian"
-                      :class="item.slide ? 'active' : ''"
-                    ></i>
-                  </el-tooltip>
-                </div>
-                <el-divider></el-divider>
-                <div class="whole flex  operation">
-                  <p class="author">by: <span v-text="item.author"></span></p>
+                    <el-tooltip
+                      class="item"
+                      effect="dark"
+                      content="轮播图"
+                      placement="top"
+                    >
+                      <i
+                        class="iconfont icon-zhaopian"
+                        :class="item.slide ? 'active' : ''"
+                      ></i>
+                    </el-tooltip>
+                  </div>
+                  <el-divider></el-divider>
+                  <div class="whole flex  operation">
+                    <p class="author">by: <span v-text="item.author"></span></p>
 
-                  <div>
-                    <i class="iconfont icon-trash" @click="deletes"></i>
+                    <div>
+                      <i class="iconfont icon-trash" @click="dels"></i>
 
-                    <i class="iconfont icon-bijinotes23"></i>
+                      <i class="iconfont icon-bijinotes23"></i>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -118,7 +120,20 @@ export default class About extends Vue {
     required: false,
     default: ''
   })
-  deletes() {
+  created() {
+    // 生命周期
+    let that = this;
+    that.axios
+      .get(`/api/bloglist`)
+      .then((res: any) => {
+        that.list = res.data;
+      })
+      .catch((response: any) => {
+        console.log(response);
+      });
+  }
+
+  dels() {
     // 删除操作
     let that = this;
     that
@@ -128,35 +143,16 @@ export default class About extends Vue {
         type: 'warning'
       })
       .then(() => {
-        // this.$message({
-        //   type: 'success',
-        //   message: '删除成功!'
-        // });
-        // myThis:any = this
         this.$message({
-        type: 'success',
-        message: '已收藏'
-      })
+          type: 'success',
+          message: '已收藏'
+        });
       })
       .catch(() => {
         this.$message({
           type: 'info',
           message: '已取消删除'
         });
-      });
-  }
-
-  created() {
-    // 生命周期
-    let that = this;
-    that.axios
-      .get(`/api/bloglist`)
-      .then((res: any) => {
-        console.log(res);
-        that.list = res.data;
-      })
-      .catch((response: any) => {
-        console.log(response);
       });
   }
 
@@ -246,6 +242,9 @@ export default class About extends Vue {
       height: 170px;
       box-sizing: border-box;
       padding: 10px 0px 10px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
     }
     img {
       width: 100%;
@@ -254,12 +253,11 @@ export default class About extends Vue {
     }
     p {
       padding: 4px 15px;
+      height: 63px;
     }
 
     &:hover {
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-      // background: #000;
-      // transform: img scale(1.01);
     }
     &:hover img {
       transform: scale(1.5, 1.5);

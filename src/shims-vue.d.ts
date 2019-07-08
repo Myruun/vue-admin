@@ -4,6 +4,5 @@ declare module "*.vue" {
 }
 declare module "qs" {
   const qs: any;
-  const froalaContent: any;
   export default qs;
 }

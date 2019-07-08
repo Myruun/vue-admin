@@ -20,7 +20,18 @@
                 ></el-input>
               </el-col>
             </el-form-item>
-            <el-form-item label="推荐类型">
+            <el-form-item label="分类类别">
+              <el-checkbox-group v-model="category_id">
+                <el-checkbox
+                  v-for="item in category"
+                  :key="item.id"
+                  :label="item.name"
+                  name="type"
+                ></el-checkbox>
+              </el-checkbox-group>
+            </el-form-item>
+
+            <el-form-item label="推荐类型" >
               <el-checkbox-group v-model="types">
                 <el-checkbox label="置顶" name="type"></el-checkbox>
                 <el-checkbox label="热门" name="type"></el-checkbox>
@@ -30,7 +41,7 @@
               </el-checkbox-group>
             </el-form-item>
             <el-form-item label="封面图片">
-              <el-col style="width:360px">
+              <el-col style="width:360px;margin-right: 28px;">
                 <el-input
                   v-model="blog_img"
                   placeholder="请输入封面图片/上传"
@@ -38,15 +49,7 @@
               </el-col>
               <el-button type="primary" @click="upimg">上传</el-button>
             </el-form-item>
-            <!-- <el-form-item label="是否幻灯片">
-              <el-switch></el-switch>
-            </el-form-item>
-            <el-form-item label="是否推荐">
-              <el-switch></el-switch>
-            </el-form-item>
-            <el-form-item label="是否有效">
-              <el-switch></el-switch>
-            </el-form-item> -->
+
             <el-form-item label="创建时间">
               <el-col style="width:200px">
                 <el-date-picker
@@ -92,7 +95,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { Getter, Action } from 'vuex-class';
-import { Froalawysiwyg } from '@/types/views/froala_wysiwyg.interface';
+import { Froalawysiwyg } from '@/types/components/froala_wysiwyg.interface';
 import { froala } from '@/components'; // 组件
 
 @Component({ components: { froala } })
@@ -105,8 +108,18 @@ export default class About extends Vue {
   types: any = ['有效'];
   blog_content: any = ''; // 内容
   synopsis: any = ''; // 简介
+  category: any[] = []; // 分类
+  category_id: any[] = []; // 分类id
   created() {
-    //
+    const that = this;
+    that.axios
+      .get(`/api/blog_category`)
+      .then((res: any) => {
+        that.category = res.data;
+      })
+      .catch((response: any) => {
+        console.log(response);
+      });
   }
 
   activated() {
@@ -132,14 +145,45 @@ export default class About extends Vue {
     let recommend: any = false;
     let slide: any = false;
     let enabled: any = false;
-    // var froalaContent =  that.$refs as NodeListof<HTMLElement>;
-    // console.log(froalaContent)
-    // that.blog_content = this['$refs'].froala.froalaContent;
-    // that.blog_content = that.$refs.froala.froalaContent;
-    // console.log(this['$refs'])
-
+    let categorys: any = that.category;
+    let categoryarr: any = [];
+    let froala: any = this.$refs.froala;
+    that.blog_content = froala.froalaContent;
     let arr = ['置顶', '热门', '推荐', '幻灯片', '有效'];
     let arrkey = [istop, hot, recommend, slide, enabled];
+
+    let Verification = [
+      that.blog_title,
+      that.author,
+      categoryarr,
+      that.blog_img,
+      that.synopsis,
+      that.blog_content
+    ];
+    let Verificationtitle: any = [
+      '文章标题',
+      '文章作者',
+      '分类类别',
+      '封面图片',
+      '内容简介',
+      '内容详情'
+    ];
+    // 非空验证
+    for (let j in Verification) {
+      if (!Verification[j]) {
+        this.$message({
+          type: 'info',
+          message: '' + Verificationtitle[j] + '为空'
+        });
+        return false;
+      }
+    }
+
+    for (let k in categorys) {
+      if (that.isStrInArray(categorys[k].name, that.category_id)) {
+        categoryarr.push(categorys[k].category_id);
+      }
+    }
     for (let i = 0; i < arr.length; i++) {
       if (that.isStrInArray(arr[i], that.types)) {
         arrkey[i] = true;
@@ -164,16 +208,17 @@ export default class About extends Vue {
       arrkey[3],
       arrkey[4],
       that.blog_content,
-      that.blog_img
+      that.blog_img,
+      categoryarr
     ];
-    // that.axios
-    //   .post(`/api/getblog`, datas)
-    //   .then((res: any) => {
-    //     console.log(res);
-    //   })
-    //   .catch((response: any) => {
-    //     console.log(response);
-    //   });
+    that.axios
+      .post(`/api/getblog`, datas)
+      .then((res: any) => {
+        console.log(res);
+      })
+      .catch((response: any) => {
+        console.log(response);
+      });
   }
   mounted() {
     //
